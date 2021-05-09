@@ -3,7 +3,9 @@ Qt官方有很多小案例，对于自己的学习是很有帮助的，在此，
 
 # 已完成
 
-## widget模块
-### Animation模块
-+ animatedtiles
++ widgets
+  + Animation
+    + animatedtiles
+  + desktop
+    + screenshot
 
