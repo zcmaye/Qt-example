@@ -12,13 +12,17 @@
 #include<QLineEdit>
 #include<QPushButton>
 #include<QTextEdit>
+#include<QMenu>
 class Window :
     public QDialog
 {
 public:
     Window(QWidget* parent = nullptr);
-    void createIconGroupBox();
-    void createMessageGroupBox();
+    void createIconGroupBox();          
+    void createMessageGroupBox();       
+    void createTrayIcon();
+public slots:
+    void showMessage();
 private:
     //tray Icon
     QGroupBox* iconGroupBox = nullptr;
@@ -38,11 +42,10 @@ private:
     QLabel* bodyLabel                = nullptr;
     QTextEdit* bodyEdit             = nullptr;
     QPushButton* showMessageBtn     = nullptr;
-
-
-
     QGridLayout* messageLayout      = nullptr;
 
+    QSystemTrayIcon* trayIcon = nullptr;
+    QMenu* trayIconMenu;
 };
 
 #endif // !WINDOW_H

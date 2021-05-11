@@ -1,16 +1,75 @@
 ﻿#include "window.h"
 #include<QVBoxLayout>
+#include<QDebug>
+#include<QApplication>
 
 Window::Window(QWidget* parent):QDialog(parent)
 {
 	resize(640, 480);
 	createIconGroupBox();
 	createMessageGroupBox();
+	//为了对其下面的布局设置一下宽度
+	iconLabel->setMinimumWidth(durationLabel->sizeHint().width());
+
+	createTrayIcon();
+
 
 	QVBoxLayout* mainLayout = new QVBoxLayout;
 	mainLayout->addWidget(iconGroupBox);
 	mainLayout->addWidget(messageGroupBox);
 	this->setLayout(mainLayout);
+
+	connect(showMessageBtn, &QPushButton::clicked, this, &Window::showMessage);
+	//点击show icon单选按钮,设置是否显示系统托盘菜单
+	connect(showIconCheckBox, &QPushButton::toggled, trayIcon, &QSystemTrayIcon::setVisible);
+	//选择不同的iconCombobox切换程序图标和系统托盘图标
+	connect(iconComboBox, qOverload<int>(&QComboBox::currentIndexChanged), this, [=](int index)
+		{
+			QIcon icon = iconComboBox->itemIcon(index);
+			trayIcon->setIcon(icon);
+			this->setWindowIcon(icon);
+			trayIcon->setToolTip(iconComboBox->currentText());
+		});
+	//根据激活系统托盘的原因，进行不同的处理
+	connect(trayIcon, &QSystemTrayIcon::activated, this, [=](QSystemTrayIcon::ActivationReason reason)
+		{
+			switch (reason)
+			{
+			case QSystemTrayIcon::Context:		//右击打开托盘上下文菜单时触发
+				qDebug() << "helo1";
+				break;
+			case QSystemTrayIcon::DoubleClick:	//双击
+			case QSystemTrayIcon::Trigger:		//单击
+				iconComboBox->setCurrentIndex
+				((iconComboBox->currentIndex() + 1) % iconComboBox->count());
+				break;
+			case QSystemTrayIcon::MiddleClick:	//中击
+				showMessage();
+				break;
+
+			}
+		});
+
+
+}
+void Window::showMessage()
+{
+	//显示消息框的时候,把系统托盘显示出来
+	showIconCheckBox->setChecked(true);
+	//获取当前typeComboBox的QSystemTrayIcon::MessageIcon的枚举值
+	int selectedIcon = typeComboBox->currentData().toInt();
+	//如果获取失败，使用iconComboBox元素的图标
+	if (selectedIcon == -1)
+	{
+		QIcon icon = iconComboBox->itemIcon(iconComboBox->currentIndex());
+		trayIcon->showMessage(titleEdit->text(), bodyEdit->toPlainText(),
+			icon, durationSpinBox->value() * 1000);
+	}
+	else
+	{
+		trayIcon->showMessage(titleEdit->text(), bodyEdit->toPlainText(),
+			QSystemTrayIcon::MessageIcon(selectedIcon), durationSpinBox->value() * 1000);
+	}
 
 }
 
@@ -20,7 +79,7 @@ void Window::createIconGroupBox()
 	iconLabel = new QLabel("Icon:");
 	iconComboBox = new QComboBox;
 	showIconCheckBox = new QCheckBox("show icon");
-	showIconCheckBox->setChecked(true);
+	showIconCheckBox->setChecked(true);	//设置默认选中
 
 	iconComboBox->addItem(QIcon(":/images/bad.png"), "Bad");
 	iconComboBox->addItem(QIcon(":/images/heart.png"), "Heart");
@@ -81,4 +140,19 @@ void Window::createMessageGroupBox()
 
 	messageGroupBox->setLayout(messageLayout);
 
+}
+
+void Window::createTrayIcon()
+{
+	trayIcon = new QSystemTrayIcon(this);
+	trayIcon->setIcon(QIcon(":/images/bad.png"));
+
+	trayIconMenu = new QMenu(this);
+	trayIconMenu->addAction("Minimize",this,&Window::showMinimized);
+	trayIconMenu->addAction("Maximize",this,&Window::showMaximized);
+	trayIconMenu->addAction("Restore",this,&Window::showNormal);
+	trayIconMenu->addAction("Quit",qApp,&QApplication::quit);
+
+	trayIcon->setContextMenu(trayIconMenu);
+	trayIcon->show();
 }
