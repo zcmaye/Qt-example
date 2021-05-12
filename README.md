@@ -8,4 +8,7 @@ Qt官方有很多小案例，对于自己的学习是很有帮助的，在此，
     + animatedtiles
   + desktop
     + screenshot
+    + systray
+  + dialogs
+    + extension
 
