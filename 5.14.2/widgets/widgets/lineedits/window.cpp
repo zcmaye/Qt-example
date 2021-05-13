@@ -136,27 +136,67 @@ void Window::validatorChanged(int index)
 	case 0:
 		validatorLineEdit->setValidator(nullptr);
 		break;
-	case 1:
+	case 1:	//只能输入整数
 		validatorLineEdit->setValidator(new QIntValidator(100,300,validatorLineEdit));
 		break;
-	case 2:
+	case 2:	//可以输入小数
 		validatorLineEdit->setValidator(new QDoubleValidator(validatorLineEdit));
 		break;
 	}
-	validatorLineEdit->clear();
+	validatorLineEdit->clear();	//每次切换输入模式时，清空lineedit的内容
 }
 
-void Window::alignmentChanged(int)
+void Window::alignmentChanged(int index)
 {
 	cout << __func__;
+	switch (index)
+	{
+	case 0:
+		alignmentLineEdit->setAlignment(Qt::AlignLeft);
+		break;
+	case 1:
+		alignmentLineEdit->setAlignment(Qt::AlignCenter);
+		break;
+	case 2:
+		alignmentLineEdit->setAlignment(Qt::AlignRight);
+		break;
+	}
 }
 
-void Window::inputMaskChanged(int)
+void Window::inputMaskChanged(int index)
 {
 	cout << __func__;
+	switch (index)
+	{
+	case 0:	//没有掩码
+		inputMaskLineEdit->setInputMask("");
+		break;
+	case 1:	//手机号码
+		inputMaskLineEdit->setText("131 2341 6991");
+		inputMaskLineEdit->setInputMask("999 9999 9999;_");
+		break;
+	case 2:	//日期
+		inputMaskLineEdit->setText("2020/05/20");
+		inputMaskLineEdit->setInputMask("0000/00/00");
+		break;
+	case 3:	//许可证
+		inputMaskLineEdit->setInputMask(">AAAAA-AAAAA-AAAAA-AAAAA-AAAAA;#");
+		break;
+	}
+	inputMaskLineEdit->setFocus();			//设置焦点
+	inputMaskLineEdit->setCursorPosition(0);//把光标位置移动到开头
 }
 
-void Window::accessChanged(int)
+void Window::accessChanged(int index)
 {
 	cout << __func__;
+	switch (index)
+	{
+	case 0:
+		accessLineEdit->setReadOnly(false);
+		break;
+	case 1:
+		accessLineEdit->setReadOnly(true);
+		break;
+	}
 }
