@@ -11,4 +11,6 @@ Qt官方有很多小案例，对于自己的学习是很有帮助的，在此，
     + [systray](https://github.com/zcmaye/Qt-example/tree/master/5.14.2/widgets/desktop/systray)
   + [dialogs](https://github.com/zcmaye/Qt-example/tree/master/5.14.2/widgets/dialogs)
     + [extension](https://github.com/zcmaye/Qt-example/tree/master/5.14.2/widgets/dialogs/extension)
-
+  
+  + [widgets](https://github.com/zcmaye/Qt-example/tree/master/5.14.2/widgets/widgets)
+    + [lineedits](https://github.com/zcmaye/Qt-example/tree/master/5.14.2/widgets/widgets/lineedits)
