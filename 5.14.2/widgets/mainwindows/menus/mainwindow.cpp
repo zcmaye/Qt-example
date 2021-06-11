@@ -1,11 +1,13 @@
 ﻿#include "mainwindow.h"
 #include<QVBoxLayout>
+#include<QMenuBar>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
 {
     QWidget *widget = new QWidget;
     setCentralWidget(widget);
+    createMenu();
 
     infoLabel = new QLabel("<i>Choose a menu option, or right-click to "
                            "invoke a context menu</i>");
@@ -22,10 +24,19 @@ MainWindow::MainWindow(QWidget *parent)
     widget->setLayout(layout);
 
 
+
 }
 
 MainWindow::~MainWindow()
 {
+
+}
+
+void MainWindow::createMenu()
+{
+    file = menuBar()->addMenu("文件");
+    edit = menuBar()->addMenu("编辑");
+    help = menuBar()->addMenu("帮助");
 
 }
 

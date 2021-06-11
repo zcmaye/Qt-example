@@ -15,7 +15,13 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
+
+    void createMenu();
 private:
     QLabel *infoLabel;  //中间信息显示
+
+    QMenu *file;
+    QMenu *edit;
+    QMenu *help;
 };
 #endif // MAINWINDOW_H
