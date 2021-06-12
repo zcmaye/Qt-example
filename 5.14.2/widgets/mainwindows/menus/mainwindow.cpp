@@ -1,13 +1,15 @@
 ﻿#include "mainwindow.h"
 #include<QVBoxLayout>
 #include<QMenuBar>
+#include<QStatusBar>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
 {
     QWidget *widget = new QWidget;
     setCentralWidget(widget);
-    createMenu();
+    createActions();
+    createMenus();
 
     infoLabel = new QLabel("<i>Choose a menu option, or right-click to "
                            "invoke a context menu</i>");
@@ -23,7 +25,7 @@ MainWindow::MainWindow(QWidget *parent)
     layout->addStretch();
     widget->setLayout(layout);
 
-
+    statusBar()->showMessage("hello");
 
 }
 
@@ -32,11 +34,27 @@ MainWindow::~MainWindow()
 
 }
 
-void MainWindow::createMenu()
+void MainWindow::createMenus()
 {
     file = menuBar()->addMenu("文件");
+    file->addAction(newAct);
+    file->addAction(openAct);
+    file->addAction(saveAct);
+    file->addAction(printAct);
+    file->addAction(exitAct);
+
     edit = menuBar()->addMenu("编辑");
     help = menuBar()->addMenu("帮助");
-
 }
 
+void MainWindow::createActions()
+{
+    newAct = new QAction("&New");
+    newAct->setShortcuts(QKeySequence::New);
+    newAct->setStatusTip("Create New File");
+
+    openAct = new QAction("&Open");
+    saveAct = new QAction("&Save");
+    printAct = new QAction("&Print");
+    exitAct = new QAction("&Exit");
+}
