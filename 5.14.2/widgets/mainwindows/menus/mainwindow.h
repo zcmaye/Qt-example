@@ -18,6 +18,27 @@ public:
     void createMenus();
     void createActions();
 
+private slots:
+    void newFile();
+    void open();
+    void save();
+    void print();
+    void undo();
+    void redo();
+    void cut();
+    void copy();
+    void paste();
+    void bold();
+    void italic();
+    void leftAlign();
+    void rightAlign();
+    void justify();
+    void center();
+    void setLineSpacing();
+    void setParagraphSpacing();
+    void about();
+    void aboutQt();
+
 private:
     QLabel *infoLabel;  //中间信息显示
 
@@ -33,8 +54,9 @@ private:
     //Edit
     QAction *undoAct;
     QAction *redoAct;
-    QAction *cutAct;
-    QAction *copyAct;
+    QAction *cutAct;    //剪切
+    QAction *copyAct;   //复制
+    QAction *pasteAct;  //粘贴
         //Format
     QMenu   *formatMenu;
     QAction *boldAct;       //粗体
@@ -47,10 +69,7 @@ private:
     QAction *paragraphSpaceAct; //段落间隔
 
     //Help
-    QAction *about;
-    QAction *aboutQt;
-
-
-
+    QAction *aboutAct;
+    QAction *aboutQtAct;
 };
 #endif // MAINWINDOW_H

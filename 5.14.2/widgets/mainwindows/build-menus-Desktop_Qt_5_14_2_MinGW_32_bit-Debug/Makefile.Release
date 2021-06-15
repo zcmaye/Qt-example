@@ -491,7 +491,11 @@ release/mainwindow.o: ../menus/mainwindow.cpp ../menus/mainwindow.h \
 		D:/MySoftWare/Qt/Qt5.14.2/5.14.2/mingw73_32/include/QtWidgets/qboxlayout.h \
 		D:/MySoftWare/Qt/Qt5.14.2/5.14.2/mingw73_32/include/QtWidgets/qlayout.h \
 		D:/MySoftWare/Qt/Qt5.14.2/5.14.2/mingw73_32/include/QtWidgets/qlayoutitem.h \
-		D:/MySoftWare/Qt/Qt5.14.2/5.14.2/mingw73_32/include/QtWidgets/qgridlayout.h
+		D:/MySoftWare/Qt/Qt5.14.2/5.14.2/mingw73_32/include/QtWidgets/qgridlayout.h \
+		D:/MySoftWare/Qt/Qt5.14.2/5.14.2/mingw73_32/include/QtWidgets/QMenuBar \
+		D:/MySoftWare/Qt/Qt5.14.2/5.14.2/mingw73_32/include/QtWidgets/qmenubar.h \
+		D:/MySoftWare/Qt/Qt5.14.2/5.14.2/mingw73_32/include/QtWidgets/QStatusBar \
+		D:/MySoftWare/Qt/Qt5.14.2/5.14.2/mingw73_32/include/QtWidgets/qstatusbar.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\mainwindow.o ..\menus\mainwindow.cpp
 
 release/moc_mainwindow.o: release/moc_mainwindow.cpp 
