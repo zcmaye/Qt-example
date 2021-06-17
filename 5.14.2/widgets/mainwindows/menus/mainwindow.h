@@ -6,6 +6,8 @@
 #include<QAction>
 #include<QLabel>
 #include<QMenu>
+#include<QFont>
+#include<QApplication>
 
 class MainWindow : public QMainWindow
 {
@@ -61,10 +63,10 @@ private:
     QMenu   *formatMenu;
     QAction *boldAct;       //粗体
     QAction *italicAct;     //斜体
-    QAction *leftAlignAct; //左对齐
-    QAction *rightAlignAct;
-    QAction *justifyAct;
-    QAction *centerAct;
+    QAction *leftAlignAct;  //左对齐
+    QAction *rightAlignAct; //右对齐
+    QAction *justifyAct;    //两端对齐
+    QAction *centerAct;     //居中对齐
     QAction *lineSpaceAct;      //行间隔
     QAction *paragraphSpaceAct; //段落间隔
 
